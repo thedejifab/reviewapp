@@ -5,8 +5,25 @@ import 'package:reviewer/widgets/info_card.dart';
 import 'package:reviewer/widgets/review.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-class Review extends StatelessWidget {
-  final Reviews reviewsState = Reviews();
+class Review extends StatefulWidget {
+  @override
+  ReviewState createState() {
+    return new ReviewState();
+  }
+}
+
+class ReviewState extends State<Review> {
+  final Reviews _reviewsState = Reviews();
+
+  List<int> _stars = [1, 2, 3, 4, 5];
+
+  int _selectedStar = 0;
+
+  @override
+  void initState() {
+    _selectedStar = _stars[0];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,20 +60,26 @@ class Review extends StatelessWidget {
                   child: DropdownButton(
                     hint: Text("Stars"),
                     elevation: 0,
-                    items: ['1', '2', '3', '4', '5'].map((star) {
+                    value: 1,
+                    items: _stars.map((star) {
                       return DropdownMenuItem(
-                        child: Text(star),
+                        child: Text(star.toString()),
                       );
                     }).toList(),
-                    onChanged: (item) {},
+                    onChanged: (item) {
+                      // setState(() {
+                      //   _selectedStar = item;
+                      // });
+                    },
                   ),
                 ),
                 Container(
                     child: IconButton(
                   icon: Icon(Icons.done),
                   onPressed: () {
-                    reviewsState.addReview(ReviewModel(
-                        comment: _commentController.text, stars: 2));
+                    _reviewsState.addReview(ReviewModel(
+                        comment: _commentController.text,
+                        stars: _selectedStar));
                   },
                 ))
               ],
@@ -69,19 +92,19 @@ class Review extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     InfoCard(
-                      infoValue: reviewsState.numberOfReviews.toString(),
+                      infoValue: _reviewsState.numberOfReviews.toString(),
                       infoLabel: "reviews",
                       cardColor: Colors.green,
                     ),
                     InfoCard(
-                      infoValue: reviewsState.averageStars.toString(),
+                      infoValue: _reviewsState.averageStars.toString(),
                       infoLabel: "average stars",
                       cardColor: Colors.lightBlue,
                     ),
                   ],
                 );
               },
-            ),          
+            ),
             SizedBox(height: 24.0),
             //the review menu label
             Container(
@@ -98,14 +121,15 @@ class Review extends StatelessWidget {
                   ),
                 ],
               ),
-            ),          
+            ),
             //contains list of reviews
             Expanded(
               child: Container(
                 child: Observer(
-                  builder: (_) => reviewsState.reviews.isNotEmpty
+                  builder: (_) => _reviewsState.reviews.isNotEmpty
                       ? ListView(
-                          children: reviewsState.reviews.reversed.map((reviewItem) {
+                          children:
+                              _reviewsState.reviews.reversed.map((reviewItem) {
                             return ReviewWidget(
                               reviewItem: reviewItem,
                             );
