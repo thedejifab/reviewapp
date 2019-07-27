@@ -4,6 +4,7 @@ import 'package:reviewer/models/reviews.dart';
 import 'package:reviewer/widgets/info_card.dart';
 import 'package:reviewer/widgets/review.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'dart:math' as math;
 
 class Review extends StatefulWidget {
   @override
@@ -15,13 +16,13 @@ class Review extends StatefulWidget {
 class ReviewState extends State<Review> {
   final Reviews _reviewsState = Reviews();
 
-  List<int> _stars = [1, 2, 3, 4, 5];
+  final List<int> _stars = [1, 2, 3, 4, 5];
 
-  int _selectedStar = 0;
+  int _selectedStar;
 
   @override
   void initState() {
-    _selectedStar = _stars[0];
+    _selectedStar = null;
     super.initState();
   }
 
@@ -60,28 +61,42 @@ class ReviewState extends State<Review> {
                   child: DropdownButton(
                     hint: Text("Stars"),
                     elevation: 0,
-                    value: 1,
+                    value: _selectedStar,
                     items: _stars.map((star) {
-                      return DropdownMenuItem(
+                      return DropdownMenuItem<int>(
                         child: Text(star.toString()),
+                        value: star,
                       );
                     }).toList(),
                     onChanged: (item) {
-                      // setState(() {
-                      //   _selectedStar = item;
-                      // });
+                      setState(() {
+                        _selectedStar = item;
+                      });
                     },
                   ),
                 ),
                 Container(
-                    child: IconButton(
-                  icon: Icon(Icons.done),
-                  onPressed: () {
-                    _reviewsState.addReview(ReviewModel(
-                        comment: _commentController.text,
-                        stars: _selectedStar));
-                  },
-                ))
+                  child: Builder(
+                    builder: (BuildContext context) {
+                      return IconButton(
+                        icon: Icon(Icons.done),
+                        onPressed: () {
+                          if (_selectedStar == null) {
+                            Scaffold.of(context).showSnackBar(SnackBar(
+                              content:
+                                  Text("You can't add a review without star"),
+                              duration: Duration(milliseconds: 500),
+                            ));
+                          } else {
+                            _reviewsState.addReview(ReviewModel(
+                                comment: _commentController.text,
+                                stars: _selectedStar));
+                          }
+                        },
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
             SizedBox(height: 12.0),
@@ -97,7 +112,7 @@ class ReviewState extends State<Review> {
                       cardColor: Colors.green,
                     ),
                     InfoCard(
-                      infoValue: _reviewsState.averageStars.toString(),
+                      infoValue: _reviewsState.averageStars.toStringAsFixed(2),
                       infoLabel: "average stars",
                       cardColor: Colors.lightBlue,
                     ),
