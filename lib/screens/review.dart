@@ -87,6 +87,12 @@ class ReviewState extends State<Review> {
                                   Text("You can't add a review without star"),
                               duration: Duration(milliseconds: 500),
                             ));
+                          }else if (_commentController.text.isEmpty) {
+                            Scaffold.of(context).showSnackBar(SnackBar(
+                              content:
+                                  Text("Review comment cannot be empty"),
+                              duration: Duration(milliseconds: 500),
+                            ));
                           } else {
                             _reviewsState.addReview(ReviewModel(
                                 comment: _commentController.text,
