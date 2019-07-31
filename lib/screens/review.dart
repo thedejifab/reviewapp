@@ -23,6 +23,7 @@ class ReviewState extends State<Review> {
   @override
   void initState() {
     _selectedStar = null;
+    _reviewsState.initReviews();
     super.initState();
   }
 
@@ -34,6 +35,12 @@ class ReviewState extends State<Review> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Review App'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.person),
+            onPressed: () {},
+          )
+        ],
       ),
       body: Center(
         child: Column(
@@ -87,10 +94,9 @@ class ReviewState extends State<Review> {
                                   Text("You can't add a review without star"),
                               duration: Duration(milliseconds: 500),
                             ));
-                          }else if (_commentController.text.isEmpty) {
+                          } else if (_commentController.text.isEmpty) {
                             Scaffold.of(context).showSnackBar(SnackBar(
-                              content:
-                                  Text("Review comment cannot be empty"),
+                              content: Text("Review comment cannot be empty"),
                               duration: Duration(milliseconds: 500),
                             ));
                           } else {

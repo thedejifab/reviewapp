@@ -54,6 +54,20 @@ mixin _$Reviews on ReviewsBase, Store {
     _$averageStarsAtom.reportChanged();
   }
 
+  final _$initReviewsAsyncAction = AsyncAction('initReviews');
+
+  @override
+  Future<void> initReviews() {
+    return _$initReviewsAsyncAction.run(() => super.initReviews());
+  }
+
+  final _$_getReviewsAsyncAction = AsyncAction('_getReviews');
+
+  @override
+  Future<List<ReviewModel>> _getReviews() {
+    return _$_getReviewsAsyncAction.run(() => super._getReviews());
+  }
+
   final _$ReviewsBaseActionController = ActionController(name: 'ReviewsBase');
 
   @override
