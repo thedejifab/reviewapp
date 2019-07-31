@@ -21,5 +21,5 @@ jobs:
           command: flutter build apk
 
       - store_artifacts:
-          path: /root/reviewer/platforms/android/app/build/outputs/apk/release/app-release.apk
-          destination: reviewer.apk
+          path: /reviewer/platforms/android/app/build/outputs/apk/release/app-release.apk
+          # destination: reviewer.apk
