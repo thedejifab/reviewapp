@@ -9,7 +9,7 @@ part 'reviews.g.dart';
 
 class Reviews = ReviewsBase with _$Reviews;
 
-abstract class ReviewsBase implements Store {
+abstract class ReviewsBase with Store {
   @observable
   ObservableList<ReviewModel> reviews = ObservableList.of([]);
 

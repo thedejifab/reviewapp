@@ -6,52 +6,58 @@ part of 'reviews.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies
+// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
 
 mixin _$Reviews on ReviewsBase, Store {
   final _$reviewsAtom = Atom(name: 'ReviewsBase.reviews');
 
   @override
   ObservableList<ReviewModel> get reviews {
+    _$reviewsAtom.context.enforceReadPolicy(_$reviewsAtom);
     _$reviewsAtom.reportObserved();
     return super.reviews;
   }
 
   @override
   set reviews(ObservableList<ReviewModel> value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$reviewsAtom);
-    super.reviews = value;
-    _$reviewsAtom.reportChanged();
+    _$reviewsAtom.context.conditionallyRunInAction(() {
+      super.reviews = value;
+      _$reviewsAtom.reportChanged();
+    }, _$reviewsAtom, name: '${_$reviewsAtom.name}_set');
   }
 
   final _$numberOfReviewsAtom = Atom(name: 'ReviewsBase.numberOfReviews');
 
   @override
   int get numberOfReviews {
+    _$numberOfReviewsAtom.context.enforceReadPolicy(_$numberOfReviewsAtom);
     _$numberOfReviewsAtom.reportObserved();
     return super.numberOfReviews;
   }
 
   @override
   set numberOfReviews(int value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$numberOfReviewsAtom);
-    super.numberOfReviews = value;
-    _$numberOfReviewsAtom.reportChanged();
+    _$numberOfReviewsAtom.context.conditionallyRunInAction(() {
+      super.numberOfReviews = value;
+      _$numberOfReviewsAtom.reportChanged();
+    }, _$numberOfReviewsAtom, name: '${_$numberOfReviewsAtom.name}_set');
   }
 
   final _$averageStarsAtom = Atom(name: 'ReviewsBase.averageStars');
 
   @override
   double get averageStars {
+    _$averageStarsAtom.context.enforceReadPolicy(_$averageStarsAtom);
     _$averageStarsAtom.reportObserved();
     return super.averageStars;
   }
 
   @override
   set averageStars(double value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$averageStarsAtom);
-    super.averageStars = value;
-    _$averageStarsAtom.reportChanged();
+    _$averageStarsAtom.context.conditionallyRunInAction(() {
+      super.averageStars = value;
+      _$averageStarsAtom.reportChanged();
+    }, _$averageStarsAtom, name: '${_$averageStarsAtom.name}_set');
   }
 
   final _$initReviewsAsyncAction = AsyncAction('initReviews');
