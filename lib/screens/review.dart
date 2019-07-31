@@ -35,12 +35,6 @@ class ReviewState extends State<Review> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Review App'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.person),
-            onPressed: () {},
-          )
-        ],
       ),
       body: Center(
         child: Column(
