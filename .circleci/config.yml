@@ -16,26 +16,12 @@ jobs:
           command: flutter doctor
 
       - run:
+          name: Run the application tests
+          command: flutter test
+
+      - run:
           name: Build the Android version
           command: flutter build apk 
 
       - store_artifacts:
           path: build/app/outputs/apk/release/app-release.apk
-
-  test:    
-    docker:
-      - image: cirrusci/flutter:v1.5.8 
-
-    branches:
-      only: test
-
-    steps:
-      - checkout
-
-      - run:
-          name: Run Flutter doctor
-          command: flutter doctor
-
-      - run:
-          name: Run the application tests
-          command: flutter test
