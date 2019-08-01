@@ -4,12 +4,15 @@ class InfoCard extends StatelessWidget {
   final String infoValue;
   final String infoLabel;
   final Color cardColor;
+  final IconData iconData;
 
   const InfoCard(
       {Key key,
       @required this.infoValue,
       @required this.infoLabel,
-      @required this.cardColor})
+      @required this.cardColor,
+      @required this.iconData,
+      })
       : super(key: key);
 
   @override
@@ -29,7 +32,7 @@ class InfoCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Icon(
-              Icons.comment,
+              iconData,
               size: 28.0,
               color: Colors.white,
             ),

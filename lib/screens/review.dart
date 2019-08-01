@@ -116,11 +116,13 @@ class ReviewState extends State<Review> {
                       infoValue: _reviewsState.numberOfReviews.toString(),
                       infoLabel: "reviews",
                       cardColor: Colors.green,
+                      iconData: Icons.comment
                     ),
                     InfoCard(
                       infoValue: _reviewsState.averageStars.toStringAsFixed(2),
                       infoLabel: "average stars",
                       cardColor: Colors.lightBlue,
+                      iconData: Icons.star,
                     ),
                   ],
                 );
