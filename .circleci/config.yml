@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cirrusci/flutter
+      - image: cirrusci/flutter:v1.5.8 
 
     steps:
       - checkout
@@ -18,10 +18,7 @@ jobs:
 
       - run:
           name: Build the Android version
-          command: flutter build apk --split-per-abi
+          command: flutter build apk 
 
       - store_artifacts:
-          path: build/app/outputs/apk/release/app-arm64-v8a-release.apk
-
-      - store_artifacts:
-          path: build/app/outputs/apk/release/app-armeabi-v7a-release.apk
+          path: build/app/outputs/apk/release/app-release.apk
