@@ -5,14 +5,6 @@ import 'package:reviewer/models/reviewmodel.dart';
 import 'package:reviewer/models/reviews.dart';
 
 void main() {
-  testWidgets('Test for rendered UI', (WidgetTester tester) async {
-    await tester.pumpWidget(MyApp());
-
-    Finder starCardFinder = find.byKey(Key('avgStar'));
-
-    expect(starCardFinder, findsOneWidget);
-  });
-
   test('Test MobX state class', () async {
     final Reviews _reviewsState = Reviews();
     _reviewsState.initReviews();
