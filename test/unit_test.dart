@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:reviewer/main.dart';
 import 'package:reviewer/models/reviewmodel.dart';
 import 'package:reviewer/models/reviews.dart';
 
