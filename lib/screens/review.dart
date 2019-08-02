@@ -123,6 +123,7 @@ class ReviewState extends State<Review> {
                       infoLabel: "average stars",
                       cardColor: Colors.lightBlue,
                       iconData: Icons.star,
+                      key: Key('avgStar'),
                     ),
                   ],
                 );
